@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="zxx" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout-user/index}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -89,7 +89,7 @@
     </div>
     <!-- Header End -->
   </header>
-    <main>
+    <main layout:fragment="content">
         <!-- Hero Area Start-->
         <div class="slider-area ">
             <div class="single-slider slider-height2 d-flex align-items-center">
@@ -293,7 +293,7 @@
                       <label for="f-option4">I’ve read and accept the </label>
                       <a href="#">terms & conditions*</a>
                     </div>
-                    <a class="btn_3" href="#">Proceed to Paypal</a>
+                    <a class="btn_3" th:href="@{/user/confirm}">Proceed to Paypal</a>
                   </div>
                 </div>
               </div>

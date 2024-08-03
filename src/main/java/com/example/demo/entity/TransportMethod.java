@@ -36,4 +36,8 @@ public class TransportMethod {
 
     @OneToMany(mappedBy = "idtransport",cascade = CascadeType.ALL)
     private List<Orders> orders;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_CART_TRANSPORT")
+    private CartItem cartItemTransport;
 }

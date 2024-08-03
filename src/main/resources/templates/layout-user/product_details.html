@@ -109,7 +109,7 @@
     <!-- Hero Area End-->
     <!--================Single Product Area =================-->
     <div th:object="${product}" class="product_image_area">
-        <div class="container">
+        <form class="container" action="/update" method="post">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="product_img_slide owl-carousel">
@@ -126,36 +126,37 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="single_product_text text-center">
-                        <span th:field="${product.description}">
-                            Seamlessly empower fully researched growth strategies and interoperable internal or
-                            “organic” sources. Credibly innovate granular internal or “organic” sources whereas high
-                            standards in web-readiness. Credibly innovate granular internal or organic sources whereas
-                            high standards in web-readiness. Energistically scale future-proof core competencies
-                            vis-a-vis impactful experiences. Dramatically synthesize integrated schemas. with optimal
-                            networks.
-                        </span>
+                    <span th:text="${product.description}">
+                        Seamlessly empower fully researched growth strategies and interoperable internal or
+                        “organic” sources. Credibly innovate granular internal or “organic” sources whereas high
+                        standards in web-readiness. Credibly innovate granular internal or organic sources whereas
+                        high standards in web-readiness. Energistically scale future-proof core competencies
+                        vis-a-vis impactful experiences. Dramatically synthesize integrated schemas. with optimal
+                        networks.
+                    </span>
                         <div class="card_area">
-                            <div class="product_count_area">
+                            <div class="product_count_area" style="margin-right: 62px;">
                                 <p>Quantity</p>
                                 <div class="product_price_count_container">
                                     <div class="product_count d-inline-block">
-                                        <span class="product_count_item number-decrement"><i class="ti-minus"></i></span>
-                                        <input class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                                        <span class="product_count_item number-increment"><i class="ti-plus"></i></span>
+                                        <span id="decrementBtn" class="product_count_item number-decrement"><i class="ti-minus"></i></span>
+                                        <input id="quantityInput" class="product_count_item input-number" type="number" th:value="${product.quatity}" min="1" max="10">
+                                        <span id="incrementBtn" class="product_count_item number-increment"><i class="ti-plus"></i></span>
                                     </div>
-                                    <span th:field="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"
-                                          style="display: inline-block; text-align: center; margin-left: 20px;">$ 45,743</span>
                                 </div>
                             </div>
+
+
                             <div class="add_to_cart">
-                                <a href="#" class="btn_3">add to cart</a>
+                                <a th:href="@{/user/add-cart/{id}(id=${product.id})}" class="btn_3">add to cart</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+
     <!--================End Single Product Area =================-->
     <!-- subscribe part here -->
     <section class="subscribe_part section_padding">
@@ -318,7 +319,6 @@
 <script src="./assets/js/mixitup.min.js"></script>
 <script src="./assets/js/jquery.counterup.min.js"></script>
 <script src="./assets/js/waypoints.min.js"></script>
-
 </body>
 
 </html>

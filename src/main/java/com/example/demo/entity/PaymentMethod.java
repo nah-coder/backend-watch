@@ -36,4 +36,8 @@ public class PaymentMethod {
 
     @OneToMany(mappedBy = "idpayment",cascade = CascadeType.ALL)
     private List<Orders> orders;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_CART_PAYMENT")
+    private CartItem cartItemPayment;
 }
