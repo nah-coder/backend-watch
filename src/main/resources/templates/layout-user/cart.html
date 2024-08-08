@@ -116,11 +116,13 @@
                             <th scope="col">Image</th>
                             <th scope="col" style="    width: 150px;">Quantity</th>
                             <th scope="col" style="text-align: center;width: 0px;">Total</th>
+                            <th scope="col" style="text-align: center;width: 0px;"></th>
+                            <th scope="col" style="text-align: center;width: 0px;"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="cart_item:${CART_ITEM}">
-                            <form action="/user/update" method="post">
+                            <form th:action="@{/user/update/{id}(id=${cart_item.productId})}" method="post">
                                 <input type="hidden" name="id" th:value="${cart_item.productId}">
                                 <td>
                                     <div class="media">
@@ -144,13 +146,24 @@
                                         th:text="${#numbers.formatDecimal(cart_item.price * cart_item.qty, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">
                                         $720.00</h5>
                                 </td>
+                                <td>
+                                    <button style="margin: 0px -40px 0 0px;width: 100px;height: 40px;background: green;border-radius: 10px;" type="submit">Sửa</button>
+                                </td>
+
                             </form>
+                            <td style="display: flex;justify-content: center">
+                                <form th:action="@{/user/remove/{id}(id=${cart_item.productId})}" method="post">
+                                    <button style="width: 100px;height: 40px;background: red;border-radius: 10px;" type="submit">Xoá</button>
+                                </form>
+                            </td>
                         </tr>
                         <tr class="payment_area">
                             <td><a class="btn_1" th:href="@{/user/shop}">Continue Shopping</a></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td>
-                                <h5 style="">Payment</h5>
+                                <h5 style="text-align: center">Payment</h5>
                             </td>
                             <td class="form-group" style="display: flex;justify-content: center;">
                                 <select class="form-control" id="payment" name="payment">
@@ -162,10 +175,13 @@
                         <tr class="shipping_area" style="border-top: none;">
                             <td style="border-top: none"></td>
                             <td style="border-top: none"></td>
+                            <td style="border-top: none"></td>
+                            <td style="border-top: none"></td>
                             <td style="border-top: none">
-                                <h5 style="margin-top: -33px;">Shipping</h5>
+                                <h5 style="margin-top: -33px;text-align: center">Shipping</h5>
                             </td>
-                            <td class="form-group" style="margin-top: -51px; border-top: none;display: flex;justify-content: center;">
+                            <td class="form-group"
+                                style="margin-top: -51px; border-top: none;display: flex;justify-content: center;">
                                 <select class="form-control" id="transport" name="transport">
                                     <option th:each="transport : ${TRANSPORT}" th:value="${transport.id}"
                                             th:text="${transport.name}">Transport
@@ -178,8 +194,10 @@
                         <tr>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td>
-                                <h5>Subtotal</h5>
+                                <h5 style="text-align: center">Subtotal</h5>
                             </td>
                             <td>
                                 <h5 th:text="${#numbers.formatDecimal(TOTAL, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"
@@ -190,8 +208,11 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td class="checkout_btn_inner float-right">
-                                <a class="btn_1 checkout_btn_1" th:href="@{/user/checkout}" style="width: 245px;">Proceed to
+                                <a class="btn_1 checkout_btn_1" th:href="@{/user/checkout}" style="width: 185px;">Proceed
+                                    to
                                     checkout</a>
                             </td>
                         </tr>

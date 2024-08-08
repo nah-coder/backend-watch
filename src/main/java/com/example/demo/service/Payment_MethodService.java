@@ -53,7 +53,6 @@ public class Payment_MethodService {
 
     public String save(Payment_MethodDTO paymentMethodDTO) {
         PaymentMethod paymentMethod = new PaymentMethod();
-        paymentMethod.setId(paymentMethodDTO.getId());
         paymentMethod.setName(paymentMethodDTO.getName());
         paymentMethod.setUrl(paymentMethodDTO.getUrl());
         paymentMethod.setCreatedDate(paymentMethodDTO.getCreatedDate());

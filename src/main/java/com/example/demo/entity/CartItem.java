@@ -15,7 +15,7 @@ import java.util.List;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId")
+    @Column(name = "productID")
     private Integer productId;
 
     @Column(name = "name")

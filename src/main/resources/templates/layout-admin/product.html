@@ -424,9 +424,9 @@
                                     <td><div th:text="${products.id}"></div></td>
                                     <td><div th:text="${products.name}"></div></td>
                                     <td><div th:text="${products.description}"></div></td>
-                                    <td><img th:src="'../assets/img/gallery/'+${products.image}" style="width:100px;"/></td>
+                                    <td><img th:src="${'/uploads/'+ products.image}" style="width:100px;"/></td>
                                     <td><div th:text="${products.quatity}"></div></td>
-                                    <td><div th:text="${#numbers.formatDecimal(products.price, 0, 'COMMA', 0, 'POINT')}"></div></td>
+                                    <td><div th:text="${#numbers.formatDecimal(products.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></div></td>
                                     <td><div th:text="${products.category.name}"></div></td>
                                     <td><div th:text="${products.isactive}"></div></td>
                                     <td>

@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.CartItem;
-import com.example.demo.entity.CartItemmm;
 import com.example.demo.entity.PaymentMethod;
 import com.example.demo.entity.TransportMethod;
 import com.example.demo.repository.Payment_MethodRepository;
@@ -27,10 +26,10 @@ public class Shopping_cartimpl implements Shopping_cartService{
     @Override
     public void add(CartItem item){
         CartItem cartItem = maps.get(item.getProductId());
-        if(cartItem == null){
+        if (cartItem == null) {
             maps.put(item.getProductId(), item);
-        }else {
-            cartItem.setQty(cartItem.getQty()+1);
+        } else {
+            cartItem.setQty(item.getQty()); // Cập nhật quantity mới
         }
     }
 

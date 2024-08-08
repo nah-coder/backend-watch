@@ -1,18 +1,20 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.Payment_MethodDTO;
-import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.PaymentMethod;
-import com.example.demo.entity.Product;
 import com.example.demo.service.Payment_MethodService;
+import com.example.demo.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/Payment")
 public class Payment_MethodController {
+    @Autowired
+    private StorageService storageService;
     @Autowired
     private Payment_MethodService payment_methodService;
     @GetMapping("/add-payment")
@@ -22,7 +24,9 @@ public class Payment_MethodController {
     }
 
     @PostMapping("/payment_save")
-    public String addpayment(@ModelAttribute("paymentDTO") Payment_MethodDTO paymentMethodDTO) {
+    public String addpayment(@ModelAttribute("paymentDTO") Payment_MethodDTO paymentMethodDTO, @RequestParam("urls") MultipartFile file) {
+        paymentMethodDTO.setUrl(file.getOriginalFilename());
+        storageService.store(file);
         payment_methodService.save(paymentMethodDTO);
         return "redirect:/admin";
     }
@@ -37,7 +41,9 @@ public class Payment_MethodController {
         return "function-admin/update-payment";
     }
     @PostMapping("/update-payment/{id}")
-    public String UpdatePayment(@PathVariable("id") int id, @ModelAttribute("paymentDTO") Payment_MethodDTO paymentMethodDTO) {
+    public String UpdatePayment(@PathVariable("id") int id, @ModelAttribute("paymentDTO") Payment_MethodDTO paymentMethodDTO, @RequestParam("urls") MultipartFile file) {
+        paymentMethodDTO.setUrl(file.getOriginalFilename());
+        storageService.store(file);
         payment_methodService.update(id, paymentMethodDTO);
         return "redirect:/admin";
     }

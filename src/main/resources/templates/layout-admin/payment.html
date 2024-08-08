@@ -419,7 +419,7 @@
                 <tr th:each="paymentMethods :${paymentMethods}">
                   <td><div th:text="${paymentMethods.id}"></div></td>
                   <td><div th:text="${paymentMethods.name}"></div></td>
-                  <td><img th:src="'../assets/img/gallery/'+${paymentMethods.url}" style="width:100px;"></img></td>
+                  <td><img th:src="'/uploads/'+${paymentMethods.url}" style="width:100px;"></img></td>
                   <td><div th:text="${paymentMethods.createdDate}"></div></td>
                   <td><div th:text="${paymentMethods.updatedDate}"></div></td>
                   <td><div th:text="${paymentMethods.isactive}"></div></td>

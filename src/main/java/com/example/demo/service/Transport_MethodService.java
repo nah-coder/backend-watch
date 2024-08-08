@@ -53,7 +53,6 @@ public class Transport_MethodService {
 
     public String save(Transport_MethodDTO transportMethodDTO) {
         TransportMethod transportMethod = new TransportMethod();
-        transportMethod.setId(transportMethodDTO.getId());
         transportMethod.setName(transportMethodDTO.getName());
         transportMethod.setNotes(transportMethodDTO.getNotes());
         transportMethod.setCreatedDate(transportMethodDTO.getCreatedDate());

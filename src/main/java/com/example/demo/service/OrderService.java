@@ -53,7 +53,6 @@ public class OrderService {
 
     public String save(OrderDTO orderDTO) {
         Orders orders = new Orders();
-        orders.setId(orderDTO.getId());
         orders.setOrdersDate(orderDTO.getOrdersDate());
         orders.setNameReciver(orderDTO.getNameReciver());
         orders.setNotes(orderDTO.getNotes());

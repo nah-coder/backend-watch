@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.CartItem;
-import com.example.demo.entity.CartItemmm;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductImageService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.Shopping_cartimpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -105,21 +105,41 @@ public class UserController {
         return "redirect:/user/show_cart";
     }
 
-//    @GetMapping("/clear")
-//    public String clearcart(){
-//        shoppingCartimpl.clear();
-//        return "redirect:/show_cart";
-//    }
-
-    @GetMapping("/remove/{productId}")
-    public String removecart(@PathVariable("productId") Integer productId) {
-        shoppingCartimpl.remove(productId);
-        return "redirect:/show_cart";
+    @PostMapping("/add-cart/{id}")
+    public ResponseEntity<String> showaddcart(@PathVariable("id") Integer id, @RequestParam("qty") Integer qty) {
+        Product product = productService.findById(id);
+        if (product != null) {
+            CartItem cartItem = new CartItem();
+            cartItem.setProductId(product.getId());
+            cartItem.setName(product.getName());
+            cartItem.setPrice(product.getPrice());
+            cartItem.setQty(qty); // Sử dụng quantity từ request
+            cartItem.setImage(product.getImage());
+            shoppingCartimpl.add(cartItem);
+        }
+        return ResponseEntity.ok("Product added to cart");
     }
-    @PostMapping("/update")
-    public String update(@RequestParam("id") Integer id, @RequestParam("qty") Integer qty){
+
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") Integer id, @RequestParam("qty") Integer qty){
         shoppingCartimpl.update(id,qty);
         return "redirect:/user/show_cart";
     }
 
+    @PostMapping("/remove/{productId}")
+    public String removecart(@PathVariable("productId") Integer productId) {
+        shoppingCartimpl.remove(productId);
+        return "redirect:/user/show_cart";
+    }
+
+    @GetMapping("/showLoginPage")
+    public String showLoginPage(){
+        return "/layout-user/login";
+    }
+//
+//    @GetMapping("/showPage403")
+//    public String showPage403(){
+//        return "error/403";
+//    }
 }

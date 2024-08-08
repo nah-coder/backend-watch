@@ -53,8 +53,6 @@ public class CategoryService {
 
     public String save(CategoryDTO categoryDTO) {
         Category category = new Category();
-//        category.setId(categoryDTO.getId());
-        category.setIdparent(categoryDTO.getIdparent());
         category.setName(categoryDTO.getName());
         category.setDescription(categoryDTO.getDescription());
         category.setQuantity(categoryDTO.getQuantity());
@@ -70,7 +68,6 @@ public class CategoryService {
         }
         Category category = new Category();
         category.setId(id);
-        category.setIdparent(categoryDTO.getIdparent());
         category.setName(categoryDTO.getName());
         category.setDescription(categoryDTO.getDescription());
         category.setQuantity(categoryDTO.getQuantity());

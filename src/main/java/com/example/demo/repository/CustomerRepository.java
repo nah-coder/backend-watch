@@ -11,4 +11,5 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("SELECT c FROM Customer c WHERE c.name LIKE %?1%")
     List<Customer> searchCustomerBy(String keyword);
+    public Customer findByUsername(String username);
 }

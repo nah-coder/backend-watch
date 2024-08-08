@@ -387,7 +387,6 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>IDPARENT</th>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Quantity</th>
@@ -399,7 +398,6 @@
                                 <tfoot>
                                 <tr>
                                     <th>ID</th>
-                                    <th>IDPARENT</th>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Quantity</th>
@@ -411,7 +409,6 @@
                                 <tbody>
                                 <tr th:each="category :${categories}">
                                     <td><div th:text="${category.id}"></div></td>
-                                    <td><div th:text="${category.idparent}"></div></td>
                                     <td><div th:text="${category.name}"></div></td>
                                     <td><div th:text="${category.description}"></div></td>
                                     <td><div th:text="${category.quantity}"></div></td>

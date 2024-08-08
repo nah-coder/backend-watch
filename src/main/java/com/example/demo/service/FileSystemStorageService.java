@@ -15,7 +15,7 @@ public class FileSystemStorageService implements StorageService{
     private final Path rootLocation;
 
     public FileSystemStorageService() {
-        this.rootLocation=Paths.get("D:\\dev\\project-backend\\project-backend-watch\\demo\\src\\main\\resources\\static\\assets\\img\\gallery");
+        this.rootLocation = Paths.get("src/main/resources/static/uploads");
     }
 
     @Override

@@ -19,9 +19,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "IDPARENT")
-    private Integer idparent;
-
     @Column(name = "NAME")
     private String name;
 

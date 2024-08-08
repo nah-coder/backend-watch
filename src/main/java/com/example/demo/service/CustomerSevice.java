@@ -2,19 +2,26 @@ package com.example.demo.service;
 
 import com.example.demo.dto.CustomerDTO;
 import com.example.demo.entity.Customer;
+import com.example.demo.entity.Roles;
 import com.example.demo.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class CustomerSevice {
+public class CustomerSevice implements CustomerServiceSrc{
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -50,7 +57,6 @@ public class CustomerSevice {
 
     public String saveCustomer(CustomerDTO customerDTO) {
         Customer savedCustomer = new Customer();
-        savedCustomer.setId(customerDTO.getId());
         savedCustomer.setName(customerDTO.getName());
         savedCustomer.setUsername(customerDTO.getUsername());
         savedCustomer.setPassword(customerDTO.getPassword());
@@ -71,7 +77,7 @@ public class CustomerSevice {
         updateCustomer.setName(customerDTO.getName());
         updateCustomer.setUsername(customerDTO.getUsername());
         updateCustomer.setPassword(customerDTO.getPassword());
-        updateCustomer.setRole(customerDTO.getRole());
+//        updateCustomer.setRole(customerDTO.getRole());
         updateCustomer.setEmail(customerDTO.getEmail());
         updateCustomer.setAddress(customerDTO.getAddress());
         updateCustomer.setCreatedDate(customerDTO.getCreatedDate());
@@ -87,4 +93,29 @@ public class CustomerSevice {
         customerRepository.deleteById(id);
         return "Customer deleted";
     }
+
+    @Override
+    public Customer findByUsername(String username) {
+        return customerRepository.findByUsername(username);
+    }
+
+    @Override
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Customer customer = customerRepository.findByUsername(username);
+        if(customer==null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(),rolesToAuthorities(customer.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Roles> roles){
+        return roles.stream().map(role->new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+
 }

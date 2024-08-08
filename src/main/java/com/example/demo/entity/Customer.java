@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+import java.sql.Blob;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,9 +30,9 @@ public class Customer {
 
     @Column(name = "PASSWORD")
     private String password;
-
-    @Column(name = "ROLE")
-    private String role;
+//
+//    @Column(name = "ROLE")
+//    private String role;
 
     @Column(name = "ADDRESS")
     private String address;
@@ -48,4 +51,12 @@ public class Customer {
 
     @OneToMany(mappedBy = "idcustomer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Orders> orders;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name="role_id")
+    )
+    private Collection<Roles> roles;
 }

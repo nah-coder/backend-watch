@@ -58,11 +58,7 @@
                                 <form th:action="@{/Category/update-category/{id}(id=${id})}" method="post" th:object="${categoryDTO}" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="id">ID</label>
-                                        <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="idparent">ID Parent</label>
-                                        <input type="number" class="form-control" id="idparent" name="idparent" th:field="*{idparent}">
+                                        <input type="number" class="form-control" id="id" name="id" th:field="*{id}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Tên sản phẩm</label>

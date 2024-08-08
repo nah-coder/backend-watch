@@ -57,10 +57,6 @@
                             <div class="card-body">
                                 <form th:action="@{/Orders/orders_save}" method="post" th:object="${ordersDTO}" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="id">ID</label>
-                                        <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="ordersDate">ordersDate</label>
                                         <input type="datetime-local" class="form-control" id="ordersDate" name="ordersDate" th:field="*{ordersDate}">
                                     </div>
