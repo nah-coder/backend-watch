@@ -65,8 +65,8 @@
                                         <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="notes">notes</label>
-                                        <input type="text" class="form-control" id="notes" name="notes" th:field="*{notes}">
+                                        <label for="editor">notes</label>
+                                        <textarea class="form-control" id="editor" name="note" th:field="*{notes}"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="createdDate">createdDate</label>
@@ -77,8 +77,14 @@
                                         <input type="datetime-local" class="form-control" id="updatedDate" name="updatedDate" th:field="*{updatedDate}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="isactive">isactive</label>
-                                        <input type="number" class="form-control" id="isactive" name="isactive" th:field="*{isactive}">
+                                        <div style="display: flex">
+                                            <input style="width: 25px" type="radio" class="form-control" id="isactive" name="isactive" th:field="*{isactive}" value="1">
+                                            <label style="margin-left: 20px;margin-top: 7px;" for="isactive">Active</label>
+                                        </div>
+                                        <div style="display: flex">
+                                            <input style="width: 25px;" type="radio" class="form-control" id="notisactive" name="isactive" th:field="*{isactive}" value="0">
+                                            <label style="margin-left: 20px;margin-top: 7px;" for="notisactive">NotActive</label>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

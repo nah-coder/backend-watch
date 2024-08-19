@@ -34,8 +34,8 @@ public class PaymentMethod {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
-    @OneToMany(mappedBy = "idpayment",cascade = CascadeType.ALL)
-    private List<Orders> orders;
+    @OneToMany(mappedBy = "payment",cascade = CascadeType.ALL)
+    private List<OrdersDetails> ordersDetails;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CART_PAYMENT")

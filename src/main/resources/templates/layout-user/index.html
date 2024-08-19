@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}">
 
     <!-- CSS here -->
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
@@ -80,7 +81,7 @@
                                         <span class="flaticon-search"></span>
                                     </div>
                                 </li>
-                                <li> <a th:href="@{/user/login}"><span class="flaticon-user"></span></a></li>
+                                <li> <a th:href="@{/user/logout}"><span class="flaticon-user"></span></a></li>
                                 <li><a th:href="@{/user/show_cart}"><span class="flaticon-shopping-cart"></span></a> </li>
                             </ul>
                         </div>
@@ -568,6 +569,37 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script th:src="@{/./assets/js/plugins.js}"></script>
     <script th:src="@{/./assets/js/main.js}"></script>
-    
+    <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+                "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.0.0/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import {
+            ClassicEditor,
+            Essentials,
+            Bold,
+            Italic,
+            Font,
+            Paragraph
+        } from 'ckeditor5';
+
+        ClassicEditor
+            .create( document.querySelector( '#editor' ), {
+                plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                toolbar: {
+                    items: [
+                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    ]
+                }
+            } )
+            .then( /* ... */ )
+            .catch( /* ... */ );
+    </script>
 </body>
 </html>

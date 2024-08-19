@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.CategoryDTO;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class CategoryController {
 
     @GetMapping("/add-category")
     public String showAddCategory(Model model) {
+        Category category = new Category();
         model.addAttribute("categoryDTO", new Category());
         return "function-admin/add-category";
     }

@@ -1,12 +1,11 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,5 +19,7 @@ public class Roles {
 
     @Column(name = "name")
     private String name;
-
+//
+//    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    private List<Customer> customers;
 }

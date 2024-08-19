@@ -423,12 +423,12 @@
                                 <tr th:each="products :${products}">
                                     <td><div th:text="${products.id}"></div></td>
                                     <td><div th:text="${products.name}"></div></td>
-                                    <td><div th:text="${products.description}"></div></td>
+                                    <td><div th:utext="${products.description}"></div></td>
                                     <td><img th:src="${'/uploads/'+ products.image}" style="width:100px;"/></td>
                                     <td><div th:text="${products.quatity}"></div></td>
                                     <td><div th:text="${#numbers.formatDecimal(products.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></div></td>
                                     <td><div th:text="${products.category.name}"></div></td>
-                                    <td><div th:text="${products.isactive}"></div></td>
+                                    <td><div th:text="${products.isactive== 1 ? 'Hiện' : 'Ẩn'}"></div></td>
                                     <td>
                                         <div class="update-button">
                                             <a th:href="@{/Product/update-product/{id}(id = ${products.id})}">

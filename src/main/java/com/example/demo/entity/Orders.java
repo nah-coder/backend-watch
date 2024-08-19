@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "orders")
-public class Orders {
+public class    Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -44,12 +44,6 @@ public class Orders {
     @JoinColumn(name = "IDCUSTOMER")
     private Customer idcustomer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "IDPAYMENT")
-    private PaymentMethod idpayment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "IDTRANSPORT")
-    private TransportMethod idtransport;
 
 }

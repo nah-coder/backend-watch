@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.OrderDTO;
 import com.example.demo.entity.CartItem;
+import com.example.demo.entity.Orders;
 import com.example.demo.entity.Product;
+import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductImageService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.Shopping_cartimpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,8 @@ public class UserController {
     private Shopping_cartimpl shoppingCartimpl;
     @Autowired
     private ProductImageService productImageService;
+    @Autowired
+    private OrderService orderService;
     @GetMapping()
     public String user() {
         return "layout-user/index";
@@ -64,9 +70,9 @@ public class UserController {
         return "layout-user/product_details";
     }
 
-    @GetMapping("/login")
-    public String showlogin() {
-        return "layout-user/login";
+    @GetMapping("/logout")
+    public String showlogout() {
+        return "layout-user/logout";
     }
 
     @GetMapping("/confirm")
@@ -75,21 +81,29 @@ public class UserController {
     }
 
     @GetMapping("/checkout")
-    public String showCheckOut(){
+    public String showCheckOut(
+//            @RequestParam("id") int id,
+            Model model
+    ){
+        model.addAttribute("OrderCheck",new Orders());
+//        model.addAttribute("order", productService.findById(id));
         return "layout-user/checkout";
+    }
+
+    @PostMapping("/savecheckout")
+    public String addOrders(@ModelAttribute("ordersDTO") OrderDTO orderDTO) {
+        orderService.save(orderDTO);
+        return "layout-user/confirmation";
     }
 
     @GetMapping("/show_cart")
     public String showcart(Model model) {
-//        model.addAttribute("categoryDTO", new Category());
-//        List<Product> products = productService.findAll();
         model.addAttribute("PAYMENT",shoppingCartimpl.findall());
         model.addAttribute("TRANSPORT",shoppingCartimpl.findAll());
         model.addAttribute("CART_ITEM", shoppingCartimpl.getAllItem());
         model.addAttribute("TOTAL",shoppingCartimpl.getTotal());
         return "/layout-user/cart";
     }
-
     @GetMapping("/add-cart/{id}")
     public String showaddcart(@PathVariable("id") Integer id) {
         Product product = productService.findById(id);
@@ -104,22 +118,6 @@ public class UserController {
         }
         return "redirect:/user/show_cart";
     }
-
-    @PostMapping("/add-cart/{id}")
-    public ResponseEntity<String> showaddcart(@PathVariable("id") Integer id, @RequestParam("qty") Integer qty) {
-        Product product = productService.findById(id);
-        if (product != null) {
-            CartItem cartItem = new CartItem();
-            cartItem.setProductId(product.getId());
-            cartItem.setName(product.getName());
-            cartItem.setPrice(product.getPrice());
-            cartItem.setQty(qty); // Sử dụng quantity từ request
-            cartItem.setImage(product.getImage());
-            shoppingCartimpl.add(cartItem);
-        }
-        return ResponseEntity.ok("Product added to cart");
-    }
-
 
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") Integer id, @RequestParam("qty") Integer qty){

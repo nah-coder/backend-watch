@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,23 +13,27 @@ import java.util.List;
 public class OrdersDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-//
-//    @Column(name = "IDORD", insertable = false, updatable = false)
-//    private Integer idord;
-//
-//    @Column(name = "IDPRODUCT")
-//    private Integer idproduct;
 
-    @Column(name = "PRICE")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idord")
+    private Orders orders;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idproduct")
+    private Product products;
+
+    @Column(name = "price")
     private Double price;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "IDORD")
-    private Orders orders;
+    @JoinColumn(name = "id_payment")
+    private PaymentMethod payment;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "IDPRODUCT")
-    private Product products;
+    @JoinColumn(name = "id_transports")
+    private TransportMethod transport;
+
 }

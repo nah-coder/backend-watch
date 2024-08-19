@@ -45,10 +45,10 @@ public class SecurityConfiguration {
         ).formLogin(
                 form->form.loginPage("/user/showLoginPage")
                         .loginProcessingUrl("/authenticateTheUser")
+                        .successHandler((request, response, authentication) -> {response.sendRedirect("/user");})
                         .permitAll()
         ).logout(
                 logout->logout.permitAll());
-
         return http.build();
     }
 }

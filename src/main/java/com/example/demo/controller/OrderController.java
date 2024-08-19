@@ -29,7 +29,6 @@ public class OrderController {
     }
 
     // sửa sinh viên
-
     @GetMapping("/update-orders/{id}")
     public String UpdateOrders(Model model, @PathVariable("id") int id) {
         model.addAttribute("id", id);

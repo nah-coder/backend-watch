@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,6 +29,8 @@ public class adminController {
     private Payment_MethodService paymentMethodService;
     @Autowired
     private Transport_MethodService transportMethodService;
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @GetMapping()
     public String admin() {
@@ -70,6 +73,8 @@ public class adminController {
         model.addAttribute("totalPage", orders.getTotalPages());
         model.addAttribute("currentPage", pageno);
         model.addAttribute("orders", orders);
+        model.addAttribute("payment", new PaymentMethod());
+        model.addAttribute("transport", new TransportMethod());
         return "layout-admin/order";
     }
 
@@ -112,5 +117,14 @@ public class adminController {
         return "layout-admin/transport";
     }
 
-
+    @GetMapping("/orderdetail/{id}")
+    public String OrderDetail(Model model, @PathVariable("id") int id){
+//        Orders orders = orderService.findById(id);
+        OrdersDetails ordersDetails = orderDetailService.findById(id);
+        List<Product> products = orderDetailService.getProductsByOrderId(id);
+        model.addAttribute("ordersDetails", ordersDetails);
+        model.addAttribute("ordersProduct", products);
+//        model.addAttribute("orders", orders);
+        return "layout-admin/orderdetail";
+    }
 }

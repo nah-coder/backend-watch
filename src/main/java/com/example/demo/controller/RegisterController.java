@@ -5,7 +5,6 @@ import com.example.demo.entity.RegisterCustomer;
 import com.example.demo.entity.Roles;
 import com.example.demo.repository.RolesRepository;
 import com.example.demo.service.CustomerServiceSrc;
-import com.example.demo.service.CustomerSevice;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ public class RegisterController {
     private CustomerServiceSrc customerServiceSrc;
     @Autowired
     private RolesRepository rolesRepository;
-//    @Autowired
-//    private CustomerSevice customerSevice;
 
     @GetMapping("/showRegisterForm")
     public String showRegisterForm(Model model) {
@@ -44,7 +41,9 @@ public class RegisterController {
     }
 
     @PostMapping("/process")
-    public String process(@Valid @ModelAttribute("registerUser") RegisterCustomer registerCustomer, BindingResult result, Model model, HttpSession session) {
+    public String process(@Valid @ModelAttribute("registerUser") RegisterCustomer registerCustomer, BindingResult result, Model model
+//            , HttpSession session
+    ) {
         if (result.hasErrors()) {
             return "layout-user/Register";
         }
@@ -68,13 +67,13 @@ public class RegisterController {
         Roles defaultRole = rolesRepository.findByName("ROLE_USER");
         Collection<Roles> roles = new ArrayList<>();
         roles.add(defaultRole);
-        newCustomer.setRoles(roles);
+        newCustomer.setRole(roles);
 
         customerServiceSrc.save(newCustomer);
 
         // thông báo thành công
 //        session.setAttribute("myuser", customer1);
 
-        return "layout-user/index";
+        return "/layout-user/index";
     }
 }

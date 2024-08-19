@@ -419,10 +419,10 @@
                                     <tr th:each="transportMethods :${transportMethods}">
                                         <td><div th:text="${transportMethods.id}"></div></td>
                                         <td><div th:text="${transportMethods.name}"></div></td>
-                                        <td><div th:text="${transportMethods.notes}"></div></td>
+                                        <td><div th:utext="${transportMethods.notes}"></div></td>
                                         <td><div th:text="${transportMethods.createdDate}"></div></td>
                                         <td><div th:text="${transportMethods.updatedDate}"></div></td>
-                                        <td><div th:text="${transportMethods.isactive}"></div></td>
+                                        <td><div th:text="${transportMethods.isactive== 1 ? 'Hiện' : 'Ẩn'}"></div></td>
                                         <td>
                                             <div class="update-button">
                                                 <a th:href="@{/Transport/update-transport/{id}(id = ${transportMethods.id})}">

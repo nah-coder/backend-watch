@@ -110,7 +110,7 @@ public class CustomerSevice implements CustomerServiceSrc{
         if(customer==null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(),rolesToAuthorities(customer.getRoles()));
+        return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(),rolesToAuthorities(customer.getRole()));
     }
 
     private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Roles> roles){

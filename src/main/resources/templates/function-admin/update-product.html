@@ -65,8 +65,8 @@
                                         <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" class="form-control" id="description" name="description" th:field="*{description}">
+                                        <label for="editor">description</label>
+                                        <textarea class="form-control" id="editor" name="description" th:field="*{description}"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="image">image</label>
@@ -87,8 +87,14 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="isactive">Is Active</label>
-                                        <input type="number" class="form-control" id="isactive" name="isactive" th:field="*{isactive}">
+                                        <div style="display: flex">
+                                            <input style="width: 25px" type="radio" class="form-control" id="isactive" name="isactive" th:field="*{isactive}" value="1">
+                                            <label style="margin-left: 20px;margin-top: 7px;" for="isactive">Active</label>
+                                        </div>
+                                        <div style="display: flex">
+                                            <input style="width: 25px;" type="radio" class="form-control" id="notisactive" name="isactive" th:field="*{isactive}" value="0">
+                                            <label style="margin-left: 20px;margin-top: 7px;" for="notisactive">NotActive</label>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form></div>

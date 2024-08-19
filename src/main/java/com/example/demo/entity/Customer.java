@@ -58,5 +58,5 @@ public class Customer {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
-    private Collection<Roles> roles;
+    private Collection<Roles> role;
 }

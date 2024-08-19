@@ -364,110 +364,62 @@
             <div class="container-fluid" layout:fragment="content">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">CUSTOMER</h1>
-                <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                    For more information about DataTables, please visit the <a target="_blank"
-                                                                               href="https://datatables.net">official DataTables documentation</a>.</p>
-
+                <h1 class="h3 mb-2 text-gray-800">OrderDetail</h1>
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <div th:each="ordersDetails:${ordersDetails}" class="row contact_form" novalidate="novalidate">
+                    <div class="col-md-6 form-group p_star">
+                        <label for="ordersDate">ordersDate</label>
+                        <input th:value="${ordersDetails.orders.ordersDate}" type="datetime-local" class="form-control" id="ordersDate" name="ordersDate">
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <div class="add-button">
-                                    <a th:href="@{/Customer/add-customer}">
-                                        Thêm Khách Hàng
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                    </a>
-                                </div>
-<!--                                <form action="">-->
-<!--                                    <div class="search" style="width: 182px">-->
-<!--                                        <input type="text" name="keyword" placeholder="Search" style="width: 150px;" th:value="${keyword}">-->
-<!--                                        <div>-->
-<!--                                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </form>-->
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>USERNAME</th>
-                                    <th>PASSWORD</th>
-                                    <th>EMAIL</th>
-                                    <th>ADDRESS</th>
-                                    <th>CREATED_DATE</th>
-                                    <th>PHONE</th>
-                                    <th>ISACTIVE</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>USERNAME</th>
-                                    <th>PASSWORD</th>
-                                    <th>EMAIL</th>
-                                    <th>ADDRESS</th>
-                                    <th>CREATED_DATE</th>
-                                    <th>PHONE</th>
-                                    <th>ISACTIVE</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <tr th:each="customers :${customers}">
-                                    <td><div th:text="${customers.id}"></div></td>
-                                    <td><div th:text="${customers.name}"></div></td>
-                                    <td><div th:text="${customers.username}"></div></td>
-                                    <td><div th:text="${customers.password}"></div></td>
-<!--                                    <td><div th:text="${customers.role}"></div></td>-->
-                                    <td><div th:text="${customers.email}"></div></td>
-                                    <td><div th:text="${customers.address}"></div></td>
-                                    <td><div th:text="${customers.createdDate}"></div></td>
-                                    <td><div th:text="${customers.phone}"></div></td>
-                                    <td><div th:text="${customers.isactive== 1 ? 'Hiện' : 'Ẩn'}"></div></td>
-                                    <td>
-                                        <div class="update-button">
-                                            <a th:href="@{/Customer/update-customer/{id}(id = ${customers.id})}">
-                                                <i class="fa-solid fa-pen"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="delete-button">
-                                            <a th:href="@{/Customer/delete-customer/{id}(id = ${customers.id})}">
-                                                <i class="fa-regular fa-circle-xmark"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li th:if="${currentPage > 1}" class="page-item"><a class="page-link"
-                                                                                        th:href="@{'?pageno='+${(currentPage)-1}}"><<</a></li>
-                                    <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage==i ? 'active' : ''}"
-                                        class="page-item"><a class="page-link"
-                                                             th:href="@{ ${keyword != null && keyword != ''? '?keyword=' + keyword + '&':'?'} + 'pageno='+${i}}"
-                                                             th:text="${i}"></a></li>
-                                    <li th:if="${currentPage < totalPage}" class="page-item"><a class="page-link"
-                                                                                                th:href="@{'?pageno='+${currentPage+1}}">>></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="nameReciver">nameRecieve</label>
+                        <input th:value="${ordersDetails.orders.nameReciver}" type="text" class="form-control" id="nameReciver" name="nameReciver">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="notes">Notes</label>
+                        <input th:value="${ordersDetails.orders.notes}" type="text" class="form-control" id="notes" name="notes">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="address">address</label>
+                        <input th:value="${ordersDetails.orders.address}" type="text" class="form-control" id="address" name="address">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="totalMoney">Total</label>
+                        <input th:value="${#numbers.formatDecimal(ordersDetails.orders.totalMoney, 0, 'COMMA', 0, 'POINT')}" type="text" class="form-control" id="totalMoney" name="totalMoney" readonly>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="phone">phone</label>
+                        <input th:value="${ordersDetails.orders.phone}" type="number" class="form-control" id="phone" name="phone">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="payment">payment</label>
+                        <img th:src="'/uploads/'+${ordersDetails.payment.url}" class="form-control" id="payment" style="width: 150px;height: 150px;">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <label for="transport">transport</label>
+                        <input th:value="${ordersDetails.transport.name}" type="text" class="form-control" id="transport" name="transport">
                     </div>
                 </div>
-
+                <tr>
+                    <th colspan="4" style="text-align: center">Sản phẩm</th>
+                </tr>
+                <div th:each="orderProduct:${ordersProduct}">
+                    <table class="product-table">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div th:text="${orderProduct.name}"></div>
+                            </td>
+                            <td><img th:src="'/uploads/'+${orderProduct.image}" style="width:100px;"></td>
+                            <td>
+                                <div th:text="${#numbers.formatDecimal(orderProduct.price, 0, 'COMMA', 0, 'POINT')}"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
             <!-- /.container-fluid -->
 
         </div>

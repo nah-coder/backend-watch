@@ -410,9 +410,9 @@
                                 <tr th:each="category :${categories}">
                                     <td><div th:text="${category.id}"></div></td>
                                     <td><div th:text="${category.name}"></div></td>
-                                    <td><div th:text="${category.description}"></div></td>
+                                    <td><div th:utext="${category.description}"></div></td>
                                     <td><div th:text="${category.quantity}"></div></td>
-                                    <td><div th:text="${category.isactive}"></div></td>
+                                    <td><div th:text="${category.isactive== 1 ? 'Hiện' : 'Ẩn'}"></div></td>
                                     <td>
                                         <div class="update-button">
                                             <a th:href="@{/Category/update-category/{id}(id = ${category.id})}">

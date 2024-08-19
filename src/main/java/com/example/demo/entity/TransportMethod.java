@@ -34,8 +34,8 @@ public class TransportMethod {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
-    @OneToMany(mappedBy = "idtransport",cascade = CascadeType.ALL)
-    private List<Orders> orders;
+    @OneToMany(mappedBy = "transport",cascade = CascadeType.ALL)
+    private List<OrdersDetails> ordersDetails;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CART_TRANSPORT")
