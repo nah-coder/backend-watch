@@ -60,6 +60,7 @@ public class CustomerSevice implements CustomerServiceSrc{
         savedCustomer.setName(customerDTO.getName());
         savedCustomer.setUsername(customerDTO.getUsername());
         savedCustomer.setPassword(customerDTO.getPassword());
+        savedCustomer.setRoles(customerDTO.getRole());
         savedCustomer.setEmail(customerDTO.getEmail());
         savedCustomer.setAddress(customerDTO.getAddress());
         savedCustomer.setCreatedDate(customerDTO.getCreatedDate());
@@ -110,7 +111,7 @@ public class CustomerSevice implements CustomerServiceSrc{
         if(customer==null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(),rolesToAuthorities(customer.getRole()));
+        return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(),rolesToAuthorities(customer.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Roles> roles){

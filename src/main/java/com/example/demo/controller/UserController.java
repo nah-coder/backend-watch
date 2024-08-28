@@ -4,10 +4,7 @@ import com.example.demo.dto.OrderDTO;
 import com.example.demo.entity.CartItem;
 import com.example.demo.entity.Orders;
 import com.example.demo.entity.Product;
-import com.example.demo.service.OrderService;
-import com.example.demo.service.ProductImageService;
-import com.example.demo.service.ProductService;
-import com.example.demo.service.Shopping_cartimpl;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private Transport_MethodService transportMethodService;
+    @Autowired
+    private Payment_MethodService paymentMethodService;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -85,8 +88,17 @@ public class UserController {
 //            @RequestParam("id") int id,
             Model model
     ){
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("OrderCheck",new Orders());
 //        model.addAttribute("order", productService.findById(id));
+//        return "layout-user/checkout";
         return "layout-user/checkout";
     }
 
@@ -98,12 +110,13 @@ public class UserController {
 
     @GetMapping("/show_cart")
     public String showcart(Model model) {
-        model.addAttribute("PAYMENT",shoppingCartimpl.findall());
-        model.addAttribute("TRANSPORT",shoppingCartimpl.findAll());
+        model.addAttribute("PAYMENT",paymentMethodService.findAll());
+        model.addAttribute("TRANSPORT",transportMethodService.findAll());
         model.addAttribute("CART_ITEM", shoppingCartimpl.getAllItem());
         model.addAttribute("TOTAL",shoppingCartimpl.getTotal());
         return "/layout-user/cart";
     }
+
     @GetMapping("/add-cart/{id}")
     public String showaddcart(@PathVariable("id") Integer id) {
         Product product = productService.findById(id);

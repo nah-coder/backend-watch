@@ -1,4 +1,6 @@
 .nice-select {
+  max-width: 180px !important;
+  width: 180px !important;
   -webkit-tap-highlight-color: transparent;
   background-color: #fff;
   border-radius: 5px;

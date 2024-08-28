@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequestMapping("/Payment")
 public class Payment_MethodController {
@@ -19,6 +22,14 @@ public class Payment_MethodController {
     private Payment_MethodService payment_methodService;
     @GetMapping("/add-payment")
     public String showAddPayment(Model model) {
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("paymentDTO", new PaymentMethod());
         return "function-admin/add-payment";
     }
@@ -35,6 +46,14 @@ public class Payment_MethodController {
 
     @GetMapping("/update-payment/{id}")
     public String Updatepayment(Model model, @PathVariable("id") int id) {
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("id", id);
         PaymentMethod paymentMethod = payment_methodService.findById(id);
         model.addAttribute("paymentDTO", paymentMethod);

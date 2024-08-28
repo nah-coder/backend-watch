@@ -114,7 +114,7 @@
                   <div class="row contact_form" novalidate="novalidate">
                     <div class="col-md-6 form-group p_star">
                         <label>ordersDate</label>
-                        <input type="datetime-local" class="form-control" id="ordersDate" name="ordersDate" th:field="*{ordersDate}">
+                        <input type="datetime-local" class="form-control" id="ordersDate" name="ordersDate" th:value="${currentDateTime}" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label>nameReciver</label>
@@ -174,17 +174,21 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">Shipping
-                          <span>Flat rate: $50.00</span>
+                        <a href="#">Payment
+                          <span>VNPAY</span>
                         </a>
-                      </li>
+                      <li>
+                        <li>
+                        <a href="#">Shipping
+                          <span>Giao Hàng Nhanh</span>
+                        </a>
                       <li>
                         <a href="#">Total
                           <span>$2210.00</span>
                         </a>
                       </li>
                     </ul>
-                      <button class="btn_3">Proceed to Paypal</button>
+                      <button style="width: 100%" class="btn_3">Proceed to Paypal</button>
                   </div>
                 </div>
               </div>

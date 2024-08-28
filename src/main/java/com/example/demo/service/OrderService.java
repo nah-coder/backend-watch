@@ -10,8 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +57,7 @@ public class OrderService {
     public String save(OrderDTO orderDTO) {
         Orders orders = new Orders();
         orders.setOrdersDate(orderDTO.getOrdersDate());
+//        orders.setOrdersDate(new LocalDate(System.currentTimeMillis()));
         orders.setNameReciver(orderDTO.getNameReciver());
         orders.setNotes(orderDTO.getNotes());
         orders.setAddress(orderDTO.getAddress());

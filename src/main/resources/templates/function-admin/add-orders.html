@@ -58,15 +58,15 @@
                                 <form th:action="@{/Orders/orders_save}" method="post" th:object="${ordersDTO}" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="ordersDate">ordersDate</label>
-                                        <input type="datetime-local" class="form-control" id="ordersDate" name="ordersDate" th:field="*{ordersDate}">
+                                        <input type="datetime-local" class="form-control" id="ordersDate" name="ordersDate" th:value="${currentDateTime}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="nameReciver">nameReciver</label>
                                         <input type="text" class="form-control" id="nameReciver" name="nameReciver" th:field="*{nameReciver}">
                                     </div>
-                                    <div id="editor" class="form-group">
-                                        <label for="notes">notes</label>
-                                        <input type="text" class="form-control" id="notes" name="notes" th:field="*{notes}">
+                                    <div class="form-group">
+                                        <label for="editor">Notes</label>
+                                        <textarea class="form-control" id="editor" name="notes" th:field="*{notes}"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="address">address</label>

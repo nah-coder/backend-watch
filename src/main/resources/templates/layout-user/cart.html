@@ -135,7 +135,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h5 th:src="'../assets/img/gallery/'+${cart_item.image}">$360.00</h5>
+                                    <img th:src="${'/uploads/'+cart_item.image}" style="width:100px;"/>
                                 </td>
                                 <td class="col-sm-1 col-md-1" style="text-align: center">
                                     <input class="form-control qty-input" name="qty" th:value="${cart_item.qty}"
@@ -152,7 +152,7 @@
 
                             </form>
                             <td style="display: flex;justify-content: center">
-                                <form th:action="@{/user/remove/{id}(id=${cart_item.productId})}" method="post">
+                                <form th:action="@{/user/remove/{id}(id=${cart_item.productId})}" method="post" style="margin-top: 31px;">
                                     <button style="width: 100px;height: 40px;background: red;border-radius: 10px;" type="submit">Xoá</button>
                                 </form>
                             </td>
@@ -166,12 +166,13 @@
                                 <h5 style="text-align: center">Payment</h5>
                             </td>
                             <td class="form-group" style="display: flex;justify-content: center;">
-                                <select class="form-control" id="payment" name="payment">
+                                <select class="form-control" id="payment" name="payment" style="max-width: 180px;width: 180px;">
                                     <option th:each="payment : ${PAYMENT}" th:value="${payment.id}"
                                             th:text="${payment.name}">Payment
                                     </option>
                                 </select>
                             </td>
+                        </tr>
                         <tr class="shipping_area" style="border-top: none;">
                             <td style="border-top: none"></td>
                             <td style="border-top: none"></td>

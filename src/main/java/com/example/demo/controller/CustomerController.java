@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequestMapping("/Customer")
 public class CustomerController {
@@ -18,6 +21,14 @@ public class CustomerController {
 
     @GetMapping("/add-customer")
     public String showAddCustomer(Model model) {
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("customerDTO", new Customer());
         return "function-admin/add-customer";
     }
@@ -30,6 +41,14 @@ public class CustomerController {
 
     @GetMapping("/update-customer/{id}")
     public String UpdateCustomer(Model model, @PathVariable("id") int id) {
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("id", id);
         Customer customer = customerSevice.findCustomerById(id);
         model.addAttribute("customerDTO", customer);

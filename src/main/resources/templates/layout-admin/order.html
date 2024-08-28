@@ -424,7 +424,7 @@
                   <td><div th:text="${orders.id}"></div></td>
                   <td><div th:text="${orders.ordersDate}"></div></td>
                   <td><div th:text="${orders.nameReciver}"></div></td>
-                  <td><div th:text="${orders.notes}"></div></td>
+                  <td><div th:utext="${orders.notes}"></div></td>
                   <td><div th:text="${orders.address}"></div></td>
                   <td><div th:text="${#numbers.formatDecimal(orders.totalMoney, 0, 'COMMA', 0, 'POINT')}"></div></td>
                   <td><div th:text="${orders.phone}"></div></td>

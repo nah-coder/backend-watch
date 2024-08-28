@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequestMapping("/Transport")
 public class Transport_MethodController {
@@ -17,6 +20,14 @@ public class Transport_MethodController {
     private Transport_MethodService transportMethodService;
     @GetMapping("/add-transport")
     public String showAddTransport(Model model) {
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("transportDTO", new TransportMethod());
         return "function-admin/add-transport";
     }
@@ -31,6 +42,14 @@ public class Transport_MethodController {
 
     @GetMapping("/update-transport/{id}")
     public String UpdateTransport(Model model, @PathVariable("id") int id) {
+        LocalDateTime now = LocalDateTime.now();
+
+        // Định dạng ngày giờ theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedNow = now.format(formatter);
+
+        // Thêm giá trị ngày giờ vào model
+        model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("id", id);
         TransportMethod transportMethod = transportMethodService.findById(id);
         model.addAttribute("transportDTO", transportMethod);

@@ -67,7 +67,7 @@ public class RegisterController {
         Roles defaultRole = rolesRepository.findByName("ROLE_USER");
         Collection<Roles> roles = new ArrayList<>();
         roles.add(defaultRole);
-        newCustomer.setRole(roles);
+        newCustomer.setRoles(roles);
 
         customerServiceSrc.save(newCustomer);
 
