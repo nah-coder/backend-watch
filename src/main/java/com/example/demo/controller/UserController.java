@@ -98,6 +98,8 @@ public class UserController {
         model.addAttribute("currentDateTime", formattedNow);
         model.addAttribute("OrderCheck",new Orders());
 //        model.addAttribute("order", productService.findById(id));
+        model.addAttribute("CART_ITEM", shoppingCartimpl.getAllItem());
+        model.addAttribute("TOTAL",shoppingCartimpl.getTotal());
 //        return "layout-user/checkout";
         return "layout-user/checkout";
     }

@@ -121,102 +121,107 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="cart_item:${CART_ITEM}">
-                            <form th:action="@{/user/update/{id}(id=${cart_item.productId})}" method="post">
-                                <input type="hidden" name="id" th:value="${cart_item.productId}">
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="assets/img/gallery/card1.png" alt=""/>
+                            <tr th:each="cart_item:${CART_ITEM}">
+                                <form th:action="@{/user/update/{id}(id=${cart_item.productId})}" method="post">
+                                    <input type="hidden" name="id" th:value="${cart_item.productId}">
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="assets/img/gallery/card1.png" alt=""/>
+                                            </div>
+                                            <div class="media-body">
+                                                <p th:text="${cart_item.name}">Minimalistic shop for multipurpose use</p>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <p th:text="${cart_item.name}">Minimalistic shop for multipurpose use</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img th:src="${'/uploads/'+cart_item.image}" style="width:100px;"/>
-                                </td>
-                                <td class="col-sm-1 col-md-1" style="text-align: center">
-                                    <input class="form-control qty-input" name="qty" th:value="${cart_item.qty}"
-                                           type="number" min="1" max="10">
-                                </td>
-                                <td>
-                                    <h5 id="total-${cart_item.productId}" style="text-align: center"
-                                        th:text="${#numbers.formatDecimal(cart_item.price * cart_item.qty, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">
-                                        $720.00</h5>
-                                </td>
-                                <td>
-                                    <button style="margin: 0px -40px 0 0px;width: 100px;height: 40px;background: green;border-radius: 10px;" type="submit">Sửa</button>
-                                </td>
+                                    </td>
+                                    <td>
+                                        <img th:src="${'/uploads/'+cart_item.image}" style="width:100px;"/>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1" style="text-align: center">
+                                        <input class="form-control qty-input" name="qty" th:value="${cart_item.qty}"
+                                               type="number" min="1" max="10">
+                                    </td>
+                                    <td>
+                                        <h5 id="total-${cart_item.productId}" style="text-align: center"
+                                            th:text="${#numbers.formatDecimal(cart_item.price * cart_item.qty, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">
+                                            $720.00</h5>
+                                    </td>
+                                    <td>
+                                        <button style="margin: 0px -40px 0 0px;width: 100px;height: 40px;background: green;border-radius: 10px;"
+                                                type="submit">Sửa
+                                        </button>
+                                    </td>
 
-                            </form>
-                            <td style="display: flex;justify-content: center">
-                                <form th:action="@{/user/remove/{id}(id=${cart_item.productId})}" method="post" style="margin-top: 31px;">
-                                    <button style="width: 100px;height: 40px;background: red;border-radius: 10px;" type="submit">Xoá</button>
                                 </form>
-                            </td>
-                        </tr>
-                        <tr class="payment_area">
-                            <td><a class="btn_1" th:href="@{/user/shop}">Continue Shopping</a></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5 style="text-align: center">Payment</h5>
-                            </td>
-                            <td class="form-group" style="display: flex;justify-content: center;">
-                                <select class="form-control" id="payment" name="payment" style="max-width: 180px;width: 180px;">
-                                    <option th:each="payment : ${PAYMENT}" th:value="${payment.id}"
-                                            th:text="${payment.name}">Payment
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="shipping_area" style="border-top: none;">
-                            <td style="border-top: none"></td>
-                            <td style="border-top: none"></td>
-                            <td style="border-top: none"></td>
-                            <td style="border-top: none"></td>
-                            <td style="border-top: none">
-                                <h5 style="margin-top: -33px;text-align: center">Shipping</h5>
-                            </td>
-                            <td class="form-group"
-                                style="margin-top: -51px; border-top: none;display: flex;justify-content: center;">
-                                <select class="form-control" id="transport" name="transport">
-                                    <option th:each="transport : ${TRANSPORT}" th:value="${transport.id}"
-                                            th:text="${transport.name}">Transport
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        </tr>
+                                <td style="display: flex;justify-content: center">
+                                    <form th:action="@{/user/remove/{id}(id=${cart_item.productId})}" method="post"
+                                          style="margin-top: 31px;">
+                                        <button style="width: 100px;height: 40px;background: red;border-radius: 10px;"
+                                                type="submit">Xoá
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr class="payment_area">
+                                <td><a class="btn_1" th:href="@{/user/shop}">Continue Shopping</a></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5 style="text-align: center">Payment</h5>
+                                </td>
+                                <td class="form-group" style="display: flex;justify-content: center;">
+                                    <select th:field="*{PAYMENT}" class="form-control" id="payment" name="payment"
+                                            style="max-width: 180px;width: 180px;">
+                                        <option th:each="payment : ${PAYMENT}" th:value="${payment.id}"
+                                                th:text="${payment.name}">Payment
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="shipping_area" style="border-top: none;">
+                                <td style="border-top: none"></td>
+                                <td style="border-top: none"></td>
+                                <td style="border-top: none"></td>
+                                <td style="border-top: none"></td>
+                                <td style="border-top: none">
+                                    <h5 style="margin-top: -33px;text-align: center">Shipping</h5>
+                                </td>
+                                <td class="form-group"
+                                    style="margin-top: -51px; border-top: none;display: flex;justify-content: center;">
+                                    <select th:field="*{TRANSPORT}" class="form-control" id="transport" name="transport">
+                                        <option th:each="transport : ${TRANSPORT}" th:value="${transport.id}"
+                                                th:text="${transport.name}">Transport
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5 style="text-align: center">Subtotal</h5>
-                            </td>
-                            <td>
-                                <h5 th:text="${#numbers.formatDecimal(TOTAL, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"
-                                    style="text-align: center">$2160.00</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="checkout_btn_inner float-right">
-                                <a class="btn_1 checkout_btn_1" th:href="@{/user/checkout}" style="width: 185px;">Proceed
-                                    to
-                                    checkout</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5 style="text-align: center">Subtotal</h5>
+                                </td>
+                                <td>
+                                    <h5 th:text="${#numbers.formatDecimal(TOTAL, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"
+                                        style="text-align: center">$2160.00</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="checkout_btn_inner float-right">
+                                    <a class="btn_1 checkout_btn_1" th:href="@{/user/checkout}" style="width: 185px;">Proceed
+                                        to
+                                        checkout</a>
+                                </td>
+                            </tr>
 
                         </tbody>
                     </table>
