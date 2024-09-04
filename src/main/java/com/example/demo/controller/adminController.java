@@ -120,9 +120,11 @@ public class adminController {
     @GetMapping("/orderdetail/{id}")
     public String OrderDetail(Model model, @PathVariable("id") int id){
 //        Orders orders = orderService.findById(id);
+        Orders orders = orderDetailService.findAllOrders(id); // Đây là đơn hàng tương ứng với idord
         OrdersDetails ordersDetails = orderDetailService.findById(id);
         List<Product> products = orderDetailService.getProductsByOrderId(id);
-        model.addAttribute("ordersDetails", ordersDetails);
+        model.addAttribute("ordersDetails", orders);
+        model.addAttribute("ordersDetailsnew", ordersDetails);
         model.addAttribute("ordersProduct", products);
 //        model.addAttribute("orders", orders);
         return "layout-admin/orderdetail";

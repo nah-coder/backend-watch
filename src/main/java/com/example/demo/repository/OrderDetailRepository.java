@@ -1,9 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Customer;
-import com.example.demo.entity.Orders;
-import com.example.demo.entity.OrdersDetails;
-import com.example.demo.entity.Product;
+import com.example.demo.entity.*;
 import com.example.demo.service.OrderService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,8 +14,16 @@ import java.util.Optional;
 public interface OrderDetailRepository extends JpaRepository<OrdersDetails,Integer> {
     @Query("SELECT o.products FROM OrdersDetails o WHERE o.orders.id = :idord")
     List<Product> findProductsByOrderId(int idord);
+//
+//    @Query("SELECT o.orders FROM OrdersDetails o WHERE o.orders.id = :idord")
+//    List<Product> findOrderByOrderId(int idproduct);
 
-    @Query("SELECT o.orders FROM OrdersDetails o")
-    public Orders findAllOrders(int id);
+    @Query("SELECT od.orders FROM OrdersDetails od WHERE od.orders.id = :idord")
+    Orders findOrdersById(@Param("idord") Integer idord);
 
+    @Query("SELECT od.payment FROM OrdersDetails od WHERE od.orders.id = :idord")
+    PaymentMethod findPaymentById(@Param("idord") Integer idord);
+
+    @Query("SELECT od.transport FROM OrdersDetails od WHERE od.orders.id = :idord")
+    TransportMethod findTransportById(@Param("idord") Integer idord);
 }

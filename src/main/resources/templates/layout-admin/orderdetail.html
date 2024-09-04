@@ -369,49 +369,61 @@
                 <div th:each="ordersDetails:${ordersDetails}" class="row contact_form" novalidate="novalidate">
                     <div class="col-md-6 form-group p_star">
                         <label for="ordersDate">ordersDate</label>
-                        <input th:value="${ordersDetails.orders.ordersDate}" type="datetime-local" class="form-control" id="ordersDate" name="ordersDate">
+                        <input th:value="${ordersDetails.ordersDate}" type="datetime-local" class="form-control" id="ordersDate" name="ordersDate" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label for="nameReciver">nameRecieve</label>
-                        <input th:value="${ordersDetails.orders.nameReciver}" type="text" class="form-control" id="nameReciver" name="nameReciver">
+                        <input th:value="${ordersDetails.nameReciver}" type="text" class="form-control" id="nameReciver" name="nameReciver" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label for="notes">Notes</label>
-                        <input th:value="${ordersDetails.orders.notes}" type="text" class="form-control" id="notes" name="notes">
+                        <input th:value="${ordersDetails.notes}" type="utext" class="form-control" id="notes" name="notes" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label for="address">address</label>
-                        <input th:value="${ordersDetails.orders.address}" type="text" class="form-control" id="address" name="address">
+                        <input th:value="${ordersDetails.address}" type="text" class="form-control" id="address" name="address" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label for="totalMoney">Total</label>
-                        <input th:value="${#numbers.formatDecimal(ordersDetails.orders.totalMoney, 0, 'COMMA', 0, 'POINT')}" type="text" class="form-control" id="totalMoney" name="totalMoney" readonly>
+                        <input th:value="${#numbers.formatDecimal(ordersDetails.totalMoney, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'" type="text" class="form-control" id="totalMoney" name="totalMoney" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label for="phone">phone</label>
-                        <input th:value="${ordersDetails.orders.phone}" type="number" class="form-control" id="phone" name="phone">
+                        <input th:value="${ordersDetails.phone}" type="number" class="form-control" id="phone" name="phone" readonly>
                     </div>
+
+                </div>
+                <div th:each="ordersDetailsnew:${ordersDetailsnew}" class="row contact_form" novalidate="novalidate">
                     <div class="col-md-6 form-group p_star">
                         <label for="payment">payment</label>
-                        <img th:src="'/uploads/'+${ordersDetails.payment.url}" class="form-control" id="payment" style="width: 150px;height: 150px;">
+                        <img th:src="'/uploads/'+${ordersDetailsnew.payment.url}" class="form-control" id="payment" style="width: 150px;height: 150px;" readonly>
                     </div>
                     <div class="col-md-6 form-group p_star">
                         <label for="transport">transport</label>
-                        <input th:value="${ordersDetails.transport.name}" type="text" class="form-control" id="transport" name="transport">
+                        <input th:value="${ordersDetailsnew.transport.name}" type="text" class="form-control" id="transport" name="transport" readonly>
                     </div>
                 </div>
-                <tr>
-                    <th colspan="4" style="text-align: center">Sản phẩm</th>
-                </tr>
-                <div th:each="orderProduct:${ordersProduct}">
-                    <table class="product-table">
-                        <tbody>
+<!--                <tr>-->
+<!--                    <th colspan="4" style="text-align: center">Sản phẩm</th>-->
+<!--                </tr>-->
+                <div style="max-height: 500px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 20px;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead style="background-color: #f4f4f4;">
                         <tr>
-                            <td>
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Image</th>
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Name</th>
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="orderProduct : ${ordersProduct}">
+                            <td style="padding: 10px; text-align: left;">
+                                <img th:src="'/uploads/' + ${orderProduct.image}" alt="Product Image" style="width: 100px; height: auto; border-radius: 4px;" />
+                            </td>
+                            <td style="padding: 10px; text-align: left; font-size: 16px; font-weight: bold;">
                                 <div th:text="${orderProduct.name}"></div>
                             </td>
-                            <td><img th:src="'/uploads/'+${orderProduct.image}" style="width:100px;"></td>
-                            <td>
+                            <td style="padding: 10px; text-align: left; font-size: 16px; color: #f60;">
                                 <div th:text="${#numbers.formatDecimal(orderProduct.price, 0, 'COMMA', 0, 'POINT')}"></div>
                             </td>
                         </tr>
