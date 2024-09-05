@@ -123,9 +123,11 @@ public class adminController {
         Orders orders = orderDetailService.findAllOrders(id); // Đây là đơn hàng tương ứng với idord
         OrdersDetails ordersDetails = orderDetailService.findById(id);
         List<Product> products = orderDetailService.getProductsByOrderId(id);
+//        List<CartItem> cartItems = orders.getCartItems(); // Lấy danh sách CartItem từ Order
         model.addAttribute("ordersDetails", orders);
         model.addAttribute("ordersDetailsnew", ordersDetails);
         model.addAttribute("ordersProduct", products);
+//        model.addAttribute("cartItems", cartItems); // Thêm CartItem vào model
 //        model.addAttribute("orders", orders);
         return "layout-admin/orderdetail";
     }

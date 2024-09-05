@@ -427,6 +427,20 @@
                                 <div th:text="${#numbers.formatDecimal(orderProduct.price, 0, 'COMMA', 0, 'POINT')}"></div>
                             </td>
                         </tr>
+<!--                        <tr th:each="cartItem : ${cartItems}">-->
+<!--                            <td style="padding: 10px; text-align: left;">-->
+<!--                                <img th:src="'/uploads/' + ${cartItem.product.image}" alt="Product Image" style="width: 100px; height: auto; border-radius: 4px;" />-->
+<!--                            </td>-->
+<!--                            <td style="padding: 10px; text-align: left; font-size: 16px; font-weight: bold;">-->
+<!--                                <div th:text="${cartItem.product.name}"></div>-->
+<!--                            </td>-->
+<!--                            <td style="padding: 10px; text-align: left; font-size: 16px; color: #f60;">-->
+<!--                                <div th:text="${#numbers.formatDecimal(cartItem.product.price, 0, 'COMMA', 0, 'POINT')}"></div>-->
+<!--                            </td>-->
+<!--                            <td style="padding: 10px; text-align: left; font-size: 16px;">-->
+<!--                                <div th:text="${cartItem.quantity}"></div>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         </tbody>
                     </table>
                 </div>

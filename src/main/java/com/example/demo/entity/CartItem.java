@@ -35,4 +35,8 @@ public class CartItem {
 
     @OneToMany(mappedBy = "cartItemPayment", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<PaymentMethod> paymentMethods;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Orders order;
 }

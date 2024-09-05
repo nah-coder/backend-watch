@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.CategoryDTO;
 import com.example.demo.dto.OrderDTO;
+import com.example.demo.entity.CartItem;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Orders;
 import com.example.demo.repository.OrderRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,8 @@ import java.util.Optional;
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private Shopping_cartimpl shoppingCartimpl;
 
     public List<Orders> findAll() {
         return orderRepository.findAll();
@@ -63,6 +67,15 @@ public class OrderService {
         orders.setAddress(orderDTO.getAddress());
         orders.setTotalMoney(orderDTO.getTotalMoney());
         orders.setPhone(orderDTO.getPhone());
+//        Collection<CartItem> cartItems = shoppingCartimpl.getAllItem();
+//
+//        // Gán mỗi CartItem vào Order
+//        for (CartItem item : cartItems) {
+//            item.setOrder(orders);  // Gán Order vào CartItem
+//        }
+//
+//        // Gán danh sách CartItem vào Order
+//        orders.setCartItems((List<CartItem>) cartItems);
         orderRepository.save(orders);
         return "thêm thành công";
     }

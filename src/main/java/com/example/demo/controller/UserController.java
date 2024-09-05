@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.OrderDTO;
 import com.example.demo.entity.CartItem;
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Orders;
 import com.example.demo.entity.Product;
+import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -14,11 +16,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
     @Autowired
     private Transport_MethodService transportMethodService;
     @Autowired
@@ -104,11 +110,69 @@ public class UserController {
         return "layout-user/checkout";
     }
 
+//    @PostMapping("/savecheckout")
+//    public String addOrders(@ModelAttribute("ordersDTO") OrderDTO orderDTO) {
+//        Orders orders = new Orders();
+//        orders.setOrdersDate(orderDTO.getOrdersDate());
+////        orders.setOrdersDate(new LocalDate(System.currentTimeMillis()));
+//        orders.setNameReciver(orderDTO.getNameReciver());
+//        orders.setNotes(orderDTO.getNotes());
+//        orders.setAddress(orderDTO.getAddress());
+//        orders.setTotalMoney(orderDTO.getTotalMoney());
+//        orders.setPhone(orderDTO.getPhone());
+//        Collection<CartItem> cartItems = shoppingCartimpl.getAllItem();
+//
+//        // Gán mỗi CartItem vào Order
+//        for (CartItem item : cartItems) {
+//            item.setOrder(orders);  // Gán Order vào CartItem
+//        }
+//
+//        // Gán danh sách CartItem vào Order
+//        orders.setCartItems((List<CartItem>) cartItems);
+//        orderService.save(orderDTO);
+//        shoppingCartimpl.clear();
+//        return "layout-user/confirmation";
+//    }
+
     @PostMapping("/savecheckout")
-    public String addOrders(@ModelAttribute("ordersDTO") OrderDTO orderDTO) {
+    public String addOrders(@ModelAttribute("ordersDTO") OrderDTO orderDTO
+//            ,@PathVariable int id,Model model
+    ) {
+        Orders orders = new Orders();
+        orders.setOrdersDate(orderDTO.getOrdersDate());
+        orders.setNameReciver(orderDTO.getNameReciver());
+        orders.setNotes(orderDTO.getNotes());
+        orders.setAddress(orderDTO.getAddress());
+        orders.setTotalMoney(orderDTO.getTotalMoney());
+        orders.setPhone(orderDTO.getPhone());
+
+        // Lấy tất cả các CartItem từ giỏ hàng
+        Collection<CartItem> cartItems = shoppingCartimpl.getAllItem();
+
+        // Gán mỗi CartItem vào Order
+        for (CartItem item : cartItems) {
+            item.setOrder(orders);  // Gán Order vào CartItem
+        }
+
+        // Chuyển Collection<CartItem> sang List<CartItem>
+        List<CartItem> cartItemList = new ArrayList<>(cartItems);
+
+        // Gán danh sách CartItem vào Order
+        orders.setCartItems(cartItemList);
+
+        // Lưu Order
         orderService.save(orderDTO);
+
+//        model.addAttribute("id", id);
+//        Orders orders1 = orderService.findById(id);
+//        model.addAttribute("OrderDTO", orders1);
+
+        // Xóa giỏ hàng sau khi đặt hàng thành công
+        shoppingCartimpl.clear();
+
         return "layout-user/confirmation";
     }
+
 
     @GetMapping("/show_cart")
     public String showcart(Model model) {

@@ -44,6 +44,7 @@ public class    Orders {
     @JoinColumn(name = "IDCUSTOMER")
     private Customer idcustomer;
 
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CartItem> cartItems;
 
 }
